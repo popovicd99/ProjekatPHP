@@ -1,0 +1,95 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+/*-------------------HEADER-------------------*/
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  background-color: #F5F5F5;
+  position: sticky;
+  top: 0;
+}
+.logo {
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #111111;
+  text-align: center;
+  padding: 1.15rem 1.1rem;
+  text-decoration: none;
+}
+.logo:hover {
+  border-style: none none solid none;
+  border-width: 2px;
+  border-color: #111111;
+}
+nav {
+  margin: 0 2rem 0 17rem;
+}
+header nav ul {
+  list-style-type: none;
+  margin: 0;
+}
+header nav li {
+  cursor: pointer;
+  display: inline-block;
+}
+header nav li a {
+  color: #111111;
+  text-align: center;
+  padding: 1.25rem 1.1rem;
+  text-decoration: none;
+}
+header nav li a:hover {
+  border-style: none none solid none;
+  border-width: 2px;
+  border-color: #111111;
+}
+/*-------------------MAIN-------------------*/
+
+.hero-section {
+  background: url("https://static.pexels.com/photos/248064/pexels-photo-248064.jpeg")
+    50% no-repeat;
+  background-size: cover;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.hero-section-text {
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+/*------------------FOOTER--------------------*/
+.sticky-footer-css {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 17%;
+}
+
+.sticky-footer-css .footer {
+  height: auto;
+  background-color: #F5F5F5;
+  color: #111111;
+  padding: 4rem ;
+}
+
+@media screen and (max-width: 800px) {
+  nav {
+    margin: 0;
+  }
+}
+@media screen and (max-width: 479px) {
+  nav {
+    font-size: 12px;
+  }
+  nav ul li a {
+    padding: 1.25rem 0.3rem;
+  }
+}
