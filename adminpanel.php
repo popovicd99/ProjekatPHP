@@ -7,6 +7,8 @@
     <title>Foundation | Welcome</title>
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css" />
     <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/adminpanel.css" />
 </head>
 
 <body>
@@ -47,7 +49,7 @@
         </nav>
     </header>
 
-    <div class="hero-section">
+    <div class="hero-section-admin">
         <div class="row">
             <div class="columns">
                 <h1>Filters</h1>

@@ -9,6 +9,7 @@
       href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
     />
     <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/login.css" />
   </head>
 
   <body>
