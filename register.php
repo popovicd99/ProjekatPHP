@@ -26,12 +26,14 @@
     <div class="hero-section">
         <form>
             <div class="sign-in-form">
-                <h4 class="text-center">Sign In</h4>
-                <label for="username">Username</label>
+                <h4 class="text-center">Register</h4>
+                <label for="name">Name</label>
+                <input type="text" name="name" class="field" id="name">
+                <label for="username">username</label>
                 <input type="text" name="user" class="field" id="username">
                 <label for="password">Password</label>
                 <input type="password" name="pass" class="field" id="password">
-                <button type="submit" class="sign-in-form-button">Sign In</button>
+                <button type="submit" class="sign-in-form-button">Register</button>
             </div>
         </form>
     </div>

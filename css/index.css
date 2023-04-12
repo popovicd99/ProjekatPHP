@@ -65,7 +65,7 @@ header nav li a:hover {
   text-shadow: 1px 1px 2px black;
 }
 
-/*-------------------LOGIN-------------------*/
+/*-------------------LOGIN/REGISTER-------------------*/
 
 .sign-in-form {
   padding: 3rem 4.5em;
@@ -92,8 +92,7 @@ header nav li a:hover {
   opacity: 0.8;
 }
 
-.sign-in-form-username,
-.sign-in-form-password {
+.field {
   border-radius: 30px;
   border: 1px solid #111111;
   opacity: 0.5;
@@ -133,6 +132,8 @@ header nav li a:hover {
   color: #111111;
   padding: 4rem;
 }
+
+/*-------------------------------------------*/
 
 @media screen and (max-width: 800px) {
   nav {
