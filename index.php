@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
   <head>
@@ -12,13 +15,28 @@
   </head>
 
   <body>
-
     <header>
       <a href="index.html" class="logo">Home</a>
       <nav>
         <ul>
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Register</a></li>
+          <?php
+
+            if(isset($_SESSION["isadmin"]) && $_SESSION["isadmin"]==1){
+              echo "<li><a href='#'>Menu</a></li>";
+              echo "<li><a href='#'>Logout</a></li>";
+            }
+
+            if(isset($_SESSION["isadmin"]) && $_SESSION["isadmin"]==0){
+              echo "<li><a href='#'>Music</a></li>";
+              echo "<li><a href='#'>Logout</a></li>";
+            }
+
+            if(!isset($_SESSION["id"])){
+              echo "<li><a href='#'>Login</a></li>";
+              echo "<li><a href='#'>Register</a></li>";
+            }
+        
+          ?>
         </ul>
       </nav>
     </header>
