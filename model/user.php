@@ -16,14 +16,16 @@ class User {
         $this->password = $password;
     }
 
-    public static function login($username,$password,mysqli $conn){
-        $query = "SELECT * FROM user WHERE username=$username AND password=$password";
+    public static function login($ime,$sifra,mysqli $conn){
+
+        $query = "SELECT * FROM user WHERE username='$ime' AND password='$sifra'";
+        
         $result = $conn->query($query);
 
-        if($result){
+        if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
-                $_SESSION["id"] = $row["id"];
-                $_SESSION["isadmin"] = $row["admin"];
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['isadmin'] = $row['admin'];
             }
             return true;
         }
