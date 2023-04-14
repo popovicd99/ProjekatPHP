@@ -17,7 +17,11 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/adminpanel.css" />
 </head>
-
+    <?php
+    include_once "db/dbbroker.php";
+    include_once "model/song.php";
+    include_once "model/category.php";
+    ?>
 <body>
 
     <div id="popup" class="popup">
@@ -26,19 +30,27 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
             <div class="sign-in-form">
                 <h4 class="text-center">New song</h4>
                 <label for="artist">Artist</label>
-                <input type="text" name="artist" class="field" id="artist">
+                <input type="text" name="artist" class="field" id="artist" required>
 
                 <label for="song">Song name</label>
-                <input type="text" name="name" class="field" id="song">
+                <input type="text" name="name" class="field" id="song" required>
 
                 <label for="category">Category</label>
-                <input type="text" name="cat" class="field" id="category">
+                <select name="cat" class="field" id="category">
+                    <?php 
+                        $result = Category::getAll($conn);
+                        if(!empty($result)):
+                            foreach($result as $row):
+                    ?>
+                    <option><?php echo $row["categoryname"];?></option>
+                    <?php endforeach; endif;?>
+                </select>
 
                 <label for="date">Realease date</label>
-                <input type="text" name="date" class="field" id="date">
+                <input type="text" name="date" class="field" id="date" required>
 
                 <label for="rank">Best ranking</label>
-                <input type="text" name="rank" class="field" id="rank">
+                <input type="text" name="rank" class="field" id="rank" required>
 
                 <button type="submit" class="sign-in-form-button">Add</button>
             </div>
@@ -83,16 +95,22 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
                             <th width="150">Best ranking</th>
                             <th width="150">Options</th>
                         </tr>
-                    </thead>
+                    </thead>                  
                     <tbody>
+                        <?php 
+                            $result = Song::getAll($conn);
+                            if(!empty($result)):
+                                foreach($result as $row):
+                        ?>
                         <tr class="table-expand-row" data-open-details>
-                            <td>LL COOL J</td>
-                            <td>Ain't nobody</td>
-                            <td class="text-right">RnB</td>
-                            <td>1983</td>
-                            <td>5</td>
+                            <td><?php echo $row["artist"];?></td>
+                            <td><?php echo $row["songname"];?></td>
+                            <td class="text-right"><?php echo $row["categoryname"];?></td>
+                            <td><?php echo $row["date"];?></td>
+                            <td><?php echo $row["rank"];?></td>
                             <td><button class="button warning">Edit</button><button class="button alert">Remove</button></td>
                         </tr>
+                        <?php endforeach; endif;?>
                     </tbody>
                 </table>
             </div>
