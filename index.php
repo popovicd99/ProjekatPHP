@@ -6,7 +6,7 @@ session_start();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation | Welcome</title>
+    <title>Music library</title>
     <link
       rel="stylesheet"
       href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
@@ -16,24 +16,24 @@ session_start();
 
   <body>
     <header>
-      <a href="index.html" class="logo">Home</a>
+      <a href="index.php" class="logo">Home</a>
       <nav>
         <ul>
           <?php
 
             if(isset($_SESSION["isadmin"]) && $_SESSION["isadmin"]==1){
-              echo "<li><a href='#'>Menu</a></li>";
-              echo "<li><a href='#'>Logout</a></li>";
+              echo "<li><a href='adminpanel.php'>Menu</a></li>";
+              echo "<li><a href='logout.php'>Logout</a></li>";
             }
 
             if(isset($_SESSION["isadmin"]) && $_SESSION["isadmin"]==0){
-              echo "<li><a href='#'>Music</a></li>";
-              echo "<li><a href='#'>Logout</a></li>";
+              echo "<li><a href='music.php'>Music</a></li>";
+              echo "<li><a href='logout.php'>Logout</a></li>";
             }
 
             if(!isset($_SESSION["id"])){
-              echo "<li><a href='#'>Login</a></li>";
-              echo "<li><a href='#'>Register</a></li>";
+              echo "<li><a href='login.php'>Login</a></li>";
+              echo "<li><a href='register.php'>Register</a></li>";
             }
         
           ?>
@@ -43,8 +43,8 @@ session_start();
 
     <div class="hero-section">
       <div class="hero-section-text">
-        <h1>Dobro dosli!</h1>
-        <h5>Ovde treba da pise nesto pametno</h5>
+        <h1>Music library</h1>
+        <h5>Samo dobra muzika!</h5>
       </div>
     </div>
 

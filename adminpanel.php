@@ -1,10 +1,17 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
+    header("Location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation | Welcome</title>
+    <title>Music library</title>
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/login.css" />
@@ -22,7 +29,7 @@
                 <input type="text" name="artist" class="field" id="artist">
 
                 <label for="song">Song name</label>
-                <input type="text" name="name" class="field" id="name">
+                <input type="text" name="name" class="field" id="song">
 
                 <label for="category">Category</label>
                 <input type="text" name="cat" class="field" id="category">
@@ -40,11 +47,11 @@
 
 
     <header>
-        <a href="index.html" class="logo">Home</a>
+        <a href="index.php" class="logo">Home</a>
         <nav>
             <ul>
                 <li id="dugme"><a>Add song</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>

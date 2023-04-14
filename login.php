@@ -20,11 +20,10 @@ include_once "model/user.php";
 <body>
 
   <header>
-    <a href="index.html" class="logo">Home</a>
+    <a href="index.php" class="logo">Home</a>
     <nav>
       <ul>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Register</a></li>
+        <li><a href="register.php">Register</a></li>
       </ul>
     </nav>
   </header>

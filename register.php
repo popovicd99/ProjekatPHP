@@ -7,7 +7,7 @@ session_start();
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foundation | Welcome</title>
+  <title>Music library</title>
   <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css" />
   <link rel="stylesheet" href="css/index.css" />
   <link rel="stylesheet" href="css/login.css" />
@@ -21,11 +21,10 @@ include_once "model/user.php";
 <body>
 
   <header>
-    <a href="index.html" class="logo">Home</a>
+    <a href="index.php" class="logo">Home</a>
     <nav>
       <ul>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Register</a></li>
+        <li><a href="login.php">Login</a></li>
       </ul>
     </nav>
   </header>
