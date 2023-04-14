@@ -24,16 +24,16 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
     ?>
 <body>
 
-    <div id="popup" class="popup">
-        <form name="add" class="popup-content animate">
-            <div class="close" onclick="document.getElementById('popup').style.display='none'">&times;</div>
+    <div id="popupadd" class="popup">
+        <form  method="POST" name="add" class="popup-content animate" id="add">
+            <div class="close" onclick="document.getElementById('popupadd').style.display='none'">&times;</div>
             <div class="sign-in-form">
                 <h4 class="text-center">New song</h4>
                 <label for="artist">Artist</label>
                 <input type="text" name="artist" class="field" id="artist" required>
 
                 <label for="song">Song name</label>
-                <input type="text" name="name" class="field" id="song" required>
+                <input type="text" name="songname" class="field" id="song" required>
 
                 <label for="category">Category</label>
                 <select name="cat" class="field" id="category">
@@ -42,7 +42,7 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
                         if(!empty($result)):
                             foreach($result as $row):
                     ?>
-                    <option><?php echo $row["categoryname"];?></option>
+                    <option value="<?php echo $row["id"];?>"><?php echo $row["categoryname"];?></option>
                     <?php endforeach; endif;?>
                 </select>
 
@@ -51,12 +51,42 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
 
                 <label for="rank">Best ranking</label>
                 <input type="text" name="rank" class="field" id="rank" required>
-
                 <button type="submit" class="sign-in-form-button">Add</button>
             </div>
         </form>
     </div>
 
+    <div id="popupedit" class="popup">
+        <form  method="POST" name="edit" class="popup-content animate" id="edit">
+            <div class="close" onclick="document.getElementById('popupedit').style.display='none'">&times;</div>
+            <div class="sign-in-form">
+                <h4 class="text-center">Edit song</h4>
+                <label for="artist">Artist</label>
+                <input type="text" name="eartist" class="field" id="eartist" value="" required>
+                <label for="song">Song name</label>
+                <input type="text" name="esongname" class="field" id="esong" value="" required>
+                <label for="category">Category</label>
+                <select name="ecat" class="field" id="category">
+                    <?php 
+                        $result = Category::getAll($conn);
+                        if(!empty($result)):
+                            foreach($result as $row):
+                    ?>
+                    <option value="<?php echo $row["id"];?>"><?php echo $row["categoryname"];?></option>
+                    <?php endforeach; endif;?>
+                </select>
+
+                <label for="date">Realease date</label>
+                <input type="text" name="edate" class="field" id="edate" value="" required>
+
+                <label for="rank">Best ranking</label>
+                <input type="text" name="erank" class="field" id="erank" value="" required>
+
+                <input type="hidden" name="eid" id="eid" value="">
+                <button type="submit" class="sign-in-form-button">Edit</button>
+            </div>
+        </form>
+    </div>
 
     <header>
         <a href="index.php" class="logo">Home</a>
@@ -108,7 +138,11 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
                             <td class="text-right"><?php echo $row["categoryname"];?></td>
                             <td><?php echo $row["date"];?></td>
                             <td><?php echo $row["rank"];?></td>
-                            <td><button class="button warning">Edit</button><button class="button alert">Remove</button></td>
+                            <input type="hidden" value="<?php echo $row["id"];?>">
+                            <td>
+                                <button class="button warning">Edit</button>
+                                <button class="button alert">Remove</button>
+                            </td>
                         </tr>
                         <?php endforeach; endif;?>
                     </tbody>
@@ -128,11 +162,9 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script src="js/ajax.js"></script>
     <script>
-        $(document).foundation();
-        document.getElementById("dugme").addEventListener("click", function() {
-            document.getElementById("popup").style.display = "block";
-        });
+        $(document).foundation();    
     </script>
 </body>
 
