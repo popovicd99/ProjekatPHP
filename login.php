@@ -33,6 +33,10 @@ include_once "model/user.php";
     <form method="POST" action="">
       <div class="sign-in-form">
         <?php
+        if(isset($_GET['uspesno'])){
+          echo "<p>Uspesno ste se registrovali!</p>";
+        }
+
         if (isset($_POST['user']) && isset($_POST['pass'])) {
 
           $response = User::login($_POST['user'], $_POST['pass'], $conn);

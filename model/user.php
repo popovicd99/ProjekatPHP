@@ -31,5 +31,18 @@ class User {
         }
         return false;
     }
+
+    public static function register($firstname,$lastname,$username,$password, mysqli $conn){
+        $query = "INSERT INTO user (firstname,lastname,username,password) VALUES ('$firstname','$lastname','$username','$password')";
+
+        if($result = $conn->query($query)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
 }
 ?>
