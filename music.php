@@ -19,9 +19,42 @@ if(!isset($_SESSION['isadmin'])){
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/adminpanel.css" />
 </head>
+<?php
+    include_once "db/dbbroker.php";
+    include_once "model/song.php";
+    include_once "model/category.php";
+?>
 
 <body>
 
+    <div id="popupedit" class="popup">
+        <form  method="POST" name="edit" class="popup-content animate" id="edit">
+            <div class="close" onclick="document.getElementById('popupedit').style.display='none'">&times;</div>
+            <div class="sign-in-form">
+                <h4 class="text-center">Edit song</h4>
+                <label for="artist">Artist</label>
+                <input type="text" name="eartist" class="field" id="eartist" value="" disabled>
+                <label for="song">Song name</label>
+                <input type="text" name="esongname" class="field" id="esong" value="" disabled>
+                <label for="category">Category</label>
+                <select name="ecat" class="field" id="category" >
+                    <?php 
+                        $result = Category::getAll($conn);
+                        if(!empty($result)):
+                            foreach($result as $row):
+                    ?>
+                    <option value="<?php echo $row["id"];?>"><?php echo $row["categoryname"];?></option>
+                    <?php endforeach; endif;?>
+                </select>
+
+                <label for="date">Realease date</label>
+                <input type="text" name="edate" class="field" id="edate" value="" disabled>
+
+                <label for="rank">Best ranking</label>
+                <input type="text" name="erank" class="field" id="erank" value="" disabled>
+            </div>
+        </form>
+    </div>
     <header>
         <a href="index.php" class="logo">Home</a>
         <nav>
@@ -37,14 +70,12 @@ if(!isset($_SESSION['isadmin'])){
                 <h1>Filters</h1>
             </div>
             <div class="columns">
-                <button class="button">Rap</button>
-                <button class="button">RnB</button>
-                <button class="button">Techno</button>
+                <button class="button filter" value="Hip-Hop">Hip-Hop</button>
+                <button class="button filter" value="R&B">R&B</button>
+                <button class="button filter" value="EDM">EDM</button>
             </div>
             <div class="columns">
-                <input type="search" placeholder="Search for a song...">
-                <button class="button">Search</button>
-                </ul>
+            <input type="search" onkeyup="search(this.value)" placeholder="Search for a song...">
             </div>
 
             <div class="row tabela">
@@ -59,15 +90,24 @@ if(!isset($_SESSION['isadmin'])){
                             <th width="150"></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="table-expand-row" data-open-details>
-                            <td>LL COOL J</td>
-                            <td>Ain't nobody</td>
-                            <td class="text-right">RnB</td>
-                            <td>1983</td>
-                            <td>5</td>
-                            <td><button class="button">Details</button></td>
+                    <tbody id="test">
+                        <?php 
+                            $result = Song::getAll($conn);
+                            if(!empty($result)):
+                                foreach($result as $row):
+                        ?>
+                        <tr class="table-expand-row">
+                            <td><?php echo $row["artist"];?></td>
+                            <td><?php echo $row["songname"];?></td>
+                            <td class="text-right"><?php echo $row["categoryname"];?></td>
+                            <td><?php echo $row["date"];?></td>
+                            <td><?php echo $row["rank"];?></td>
+                            <input type="hidden" value="<?php echo $row["id"];?>">
+                            <td>
+                                <button class="button" onclick="detalji(this)">Details</button>
+                            </td>
                         </tr>
+                        <?php endforeach; endif;?>
                     </tbody>
                 </table>
             </div>
@@ -84,6 +124,7 @@ if(!isset($_SESSION['isadmin'])){
     </div>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="js/ajaxuser.js" type="text/javascript"></script>
     <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 </body>
 
