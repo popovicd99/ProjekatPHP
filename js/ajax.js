@@ -111,5 +111,72 @@ $('#edit').submit(function(){
 
 })
 
+function search(value) {
+    request = $.ajax({
+        url: 'handle/search.php',
+        type: 'post',
+        data: {'search': value},
+    });
 
+    request.done(function(res){
+        let songs = JSON.parse(res);
+        let html = "";
+        if(songs!=null){
+            songs.forEach(($row) => {
+                html +=`
+                <tr class="table-expand-row" data-open-details>
+                    <td>${$row.artist}</td>
+                    <td>${$row.songname}</td>
+                    <td class="text-right">${$row.categoryname}</td>
+                    <td>${$row.date}</td>
+                    <td>${$row.rank}</td>
+                    <input type="hidden" value="${$row.id}">
+                    <td>
+                        <button class="button warning">Edit</button>
+                        <button class="button alert">Remove</button>
+                    </td>
+                </tr>`;
+            });
+        }
 
+        document.getElementById("test").innerHTML = html;
+
+    });
+}
+
+$('.filter').click(function(){
+
+    let value = $(this).val();
+
+    request = $.ajax({
+        url: 'handle/filter.php',
+        type: 'post',
+        data: {'filter': value},
+    });
+
+    request.done(function(res){
+        let songs = JSON.parse(res);
+        let html = "";
+        if(songs!=null){
+            songs.forEach(($row) => {
+                html +=`
+                <tr class="table-expand-row" data-open-details>
+                    <td>${$row.artist}</td>
+                    <td>${$row.songname}</td>
+                    <td class="text-right">${$row.categoryname}</td>
+                    <td>${$row.date}</td>
+                    <td>${$row.rank}</td>
+                    <input type="hidden" value="${$row.id}">
+                    <td>
+                        <button class="button warning">Edit</button>
+                        <button class="button alert">Remove</button>
+                    </td>
+                </tr>`;
+            });
+        }
+
+        document.getElementById("test").innerHTML = html;
+
+    });
+
+})

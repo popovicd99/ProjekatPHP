@@ -104,14 +104,12 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
                 <h1>Filters</h1>
             </div>
             <div class="columns">
-                <button class="button">Rap</button>
-                <button class="button">RnB</button>
-                <button class="button">Techno</button>
+                <button class="button filter" value="Hip-Hop">Hip-Hop</button>
+                <button class="button filter" value="R&B">R&B</button>
+                <button class="button filter" value="EDM">EDM</button>
             </div>
             <div class="columns">
-                <input type="search" placeholder="Search for a song...">
-                <button class="button">Search</button>
-                </ul>
+                <input type="search" onkeyup="search(this.value)" placeholder="Search for a song...">
             </div>
 
             <div class="row tabela">
@@ -126,13 +124,13 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
                             <th width="150">Options</th>
                         </tr>
                     </thead>                  
-                    <tbody>
+                    <tbody id="test">
                         <?php 
                             $result = Song::getAll($conn);
                             if(!empty($result)):
                                 foreach($result as $row):
                         ?>
-                        <tr class="table-expand-row" data-open-details>
+                        <tr class="table-expand-row">
                             <td><?php echo $row["artist"];?></td>
                             <td><?php echo $row["songname"];?></td>
                             <td class="text-right"><?php echo $row["categoryname"];?></td>
@@ -161,8 +159,8 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
     </div>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="js/ajax.js" type="text/javascript"></script>
     <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-    <script src="js/ajax.js"></script>
     <script>
         $(document).foundation();    
     </script>

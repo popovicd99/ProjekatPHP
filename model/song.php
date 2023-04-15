@@ -59,6 +59,38 @@ class Song{
         return $result = $conn->query($query);
     }
 
+    public static function search($search, mysqli $conn){
+
+        $query = "SELECT s.id,s.artist,s.songname,c.categoryname,s.date,s.rank FROM song s JOIN category c ON s.category=c.id WHERE s.artist LIKE '$search%' OR s.songname LIKE'$search%' OR c.categoryname LIKE '$search%' OR s.date LIKE '$search%' OR s.rank LIKE '$search%'";
+
+        $result = $conn->query($query);
+
+        $data = [];
+
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
+
+    public static function filter($search, mysqli $conn){
+
+        $query = "SELECT s.id,s.artist,s.songname,c.categoryname,s.date,s.rank FROM song s JOIN category c ON s.category=c.id WHERE c.categoryname LIKE '$search'";
+
+        $result = $conn->query($query);
+
+        $data = [];
+
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
+
 }
 
 ?>
