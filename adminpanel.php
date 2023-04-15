@@ -138,8 +138,8 @@ if(!isset($_SESSION['isadmin']) || $_SESSION['isadmin'] == 0){
                             <td><?php echo $row["rank"];?></td>
                             <input type="hidden" value="<?php echo $row["id"];?>">
                             <td>
-                                <button class="button warning">Edit</button>
-                                <button class="button alert">Remove</button>
+                                <button class="button warning" onclick="izmeni(this)" >Edit</button>
+                                <button class="button alert" onclick="izbrisi(this)">Remove</button>
                             </td>
                         </tr>
                         <?php endforeach; endif;?>

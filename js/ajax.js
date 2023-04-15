@@ -23,8 +23,11 @@ $('#add').submit(function(){
     });
 
 })
+$('#dugme').click(function(){
 
-$('.alert').click(function(){
+    document.getElementById("popupadd").style.display = "block";
+})
+/*$('.alert').click(function(){
 
     const input = $(this).closest('tr').find('input');
     value = input.val();
@@ -45,10 +48,6 @@ $('.alert').click(function(){
         }
     });
 
-})
-$('#dugme').click(function(){
-
-    document.getElementById("popupadd").style.display = "block";
 })
 
 $('.warning').click(function(){
@@ -84,7 +83,63 @@ $('.warning').click(function(){
 
     });
 
-})
+})*/
+function izbrisi(field) {
+
+    const input = $(field).closest('tr').find('input');
+    value = input.val();
+
+    request = $.ajax({
+        url: 'handle/delete.php',
+        type: 'post',
+        data: {'deleteid': value},
+    });
+
+    request.done(function(res){
+        if(res == "success"){
+            input.closest('tr').remove();
+            alert("Pesma je uspesno izbrisana!");
+            location.reload(true);
+        }else{
+            alert("Pesma nije izbrisana!");
+        }
+    });
+}
+
+function izmeni(field) {
+
+    document.getElementById("popupedit").style.display = "block";
+
+    const input = $(field).closest('tr').find("input");
+    value = input.val();
+
+    request = $.ajax({
+        url: 'handle/load.php',
+        type: 'post',
+        data: {'loadid': value},
+        dataType: 'json'
+    });
+
+    request.done(function(res){
+
+        const artist = document.getElementById("eartist");
+        artist.value = res['artist'];
+
+        const songname = document.getElementById("esong");
+        songname.value = res['songname'];
+
+        const date = document.getElementById("edate");
+        date.value = res['date'];
+
+        const rank = document.getElementById("erank");
+        rank.value = res['rank'];
+
+        const id = document.getElementById("eid");
+        id.value = res['id'];
+
+    });
+}
+
 
 $('#edit').submit(function(){
     event.preventDefault();
@@ -132,8 +187,8 @@ function search(value) {
                     <td>${$row.rank}</td>
                     <input type="hidden" value="${$row.id}">
                     <td>
-                        <button class="button warning">Edit</button>
-                        <button class="button alert">Remove</button>
+                        <button class="button warning" onclick="izmeni(this)">Edit</button>
+                        <button class="button alert" onclick="izbrisi(this)">Remove</button>
                     </td>
                 </tr>`;
             });
@@ -168,8 +223,8 @@ $('.filter').click(function(){
                     <td>${$row.rank}</td>
                     <input type="hidden" value="${$row.id}">
                     <td>
-                        <button class="button warning">Edit</button>
-                        <button class="button alert">Remove</button>
+                        <button class="button warning" onclick="izmeni(this)">Edit</button>
+                        <button class="button alert" onclick="izbrisi(this)">Remove</button>
                     </td>
                 </tr>`;
             });
